@@ -1,0 +1,150 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Defaulting to user installation because normal site-packages is not writeable\n",
+      "Collecting allpairspy\n",
+      "  Downloading allpairspy-2.5.0-py2.py3-none-any.whl (8.7 kB)\n",
+      "Requirement already satisfied: six<2.0.0,>=1.10.0 in /usr/local/lib/python3.6/dist-packages (from allpairspy) (1.15.0)\n",
+      "Installing collected packages: allpairspy\n",
+      "Successfully installed allpairspy-2.5.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install allpairspy\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "PAIRWISE:\n",
+      " 0: ['First1', 'OneWay1', 'ShortHaul1', 'Direct1', 'Peak1', 'No1']\n",
+      " 1: ['business2', 'Return2', 'LongHaul2', 'Indirect2', 'Norma2', 'No1']\n",
+      " 2: ['business2', 'OneWay1', 'LongHaul2', 'Direct1', 'Low3', 'NonStaff2']\n",
+      " 3: ['First1', 'Return2', 'ShortHaul1', 'Indirect2', 'Low3', 'JuniorStaff3']\n",
+      " 4: ['First1', 'Return2', 'LongHaul2', 'Direct1', 'Norma2', 'SeniorStaff4']\n",
+      " 5: ['business2', 'OneWay1', 'ShortHaul1', 'Indirect2', 'Peak1', 'SeniorStaff4']\n",
+      " 6: ['business2', 'OneWay1', 'ShortHaul1', 'Indirect2', 'Norma2', 'JuniorStaff3']\n",
+      " 7: ['First1', 'Return2', 'LongHaul2', 'Indirect2', 'Peak1', 'NonStaff2']\n",
+      " 8: ['First1', 'Return2', 'LongHaul2', 'Direct1', 'Low3', 'JuniorStaff3']\n",
+      " 9: ['First1', 'Return2', 'ShortHaul1', 'Indirect2', 'Low3', 'SeniorStaff4']\n",
+      "10: ['First1', 'Return2', 'ShortHaul1', 'Indirect2', 'Low3', 'No1']\n",
+      "11: ['First1', 'Return2', 'ShortHaul1', 'Indirect2', 'Peak1', 'JuniorStaff3']\n",
+      "12: ['First1', 'Return2', 'ShortHaul1', 'Indirect2', 'Norma2', 'NonStaff2']\n"
+     ]
+    }
+   ],
+   "source": [
+    " from allpairspy import AllPairs\n",
+    "\n",
+    "parameters = [\n",
+    "#     \"First1\", \"business2\"  \"Economy3\"\n",
+    "    [\"First1\", \"business2\"],\n",
+    "#     \"NonDomestic2\" \"Domestic\"\n",
+    "#     [\"NonDomestic2\"],\n",
+    "#     [\"UpgradeYes1\", \"NoUpgrade2\"],\n",
+    "    [\"OneWay1\",\"Return2\"],\n",
+    "    [\"ShortHaul1\",\"LongHaul2\"],\n",
+    "    [\"Direct1\",\"Indirect2\"],\n",
+    "#     \"VIP1\" ,\"noVIP\" \n",
+    "#     [\"VIP1\"],\n",
+    "#     [\"Diamond1\",\"Gold2\"],\n",
+    "    [\"Peak1\",\"Norma2\",\"Low3\",],\n",
+    "    [\"No1\",\"NonStaff2\",\"JuniorStaff3\",\"SeniorStaff4\"]\n",
+    "]\n",
+    "\n",
+    "print(\"PAIRWISE:\")\n",
+    "for i, pairs in enumerate(AllPairs(parameters)):\n",
+    "    print(\"{:2d}: {}\".format(i, pairs))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from allpairspy import AllPairs\n",
+    "\n",
+    "def is_valid_combination(row):\n",
+    "\n",
+    "    n = len(row)\n",
+    "    print( row);\n",
+    "    print( n);\n",
+    "    if n > 1:\n",
+    "        if (\"First\" == row[0] and \"Domestic\" == row[1])or(\"First\" == row[0] and \"UpgradeYes\" == row[2]):\n",
+    "            return False\n",
+    "#         elif \"UpgradeYes\" == row[2] and \"First\" == row[0]:\n",
+    "#             return False\n",
+    "#         elif \"UpgradeYes\" == row[2] and \"business\" == row[0]:\n",
+    "#             return False\n",
+    "#         elif \"NoUpgrade\" == row[2] and \"First\" == row[0]:\n",
+    "#             return False\n",
+    "#         elif \"NoUpgrade\" == row[2] and \"business\" == row[0]:\n",
+    "#             return False\n",
+    "\n",
+    "    return True\n",
+    "\n",
+    "parameters = [\n",
+    "    [\"First\", \"business\",\"Economy\"],\n",
+    "    [\"Domestic\",\"NonDomestic\"],\n",
+    "    [\"UpgradeYes\", \"NoUpgrade\"],\n",
+    "    [\"OneWay\",\"Return\"],\n",
+    "    [\"ShortHaul\",\"LongHaul\"],\n",
+    "    [\"OneWay\",\"Return\"],\n",
+    "    [\"Direct\",\"Indirect\"],\n",
+    "    [\"VIP\",\"NonVIP\"],\n",
+    "    [\"Diamond\",\"Gold\"],\n",
+    "    [\"Peak\",\"Normal\",\"Low\",],\n",
+    "    [\"No\",\"NonStaff\",\"JuniorStaff\",\"SeniorStaff\"]\n",
+    "]\n",
+    "\n",
+    "print(\"PAIRWISE:\")\n",
+    "for i, pairs in enumerate(AllPairs(parameters, filter_func=is_valid_combination)):\n",
+    "    print(\"{:2d}: {}\".format(i, pairs))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
